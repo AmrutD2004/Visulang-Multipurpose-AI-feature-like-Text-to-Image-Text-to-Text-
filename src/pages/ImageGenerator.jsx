@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import Navbar from '../components/Navbar'
 
 const ImageGenerator = () => {
+
   const [stateinput, setInput] = useState({ input: '' })
   const [data, setData] = useState('')
   const [loading, setLoading] = useState(false)

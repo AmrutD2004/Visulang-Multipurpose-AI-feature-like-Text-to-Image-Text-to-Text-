@@ -7,14 +7,14 @@ const TextToText = () => {
   const [outputText, setOutputText] = useState('');
   const [loading, setLoading] = useState(false);
 
-  const token = "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";
+  const token = import.meta.env.VITE_API_KEY; // ✅ Must use VITE_ prefix
   const endpoint = "https://openrouter.ai/api/v1";
-  const modelname = "z-ai/glm-4.5-air:free ";
+  const modelname = "z-ai/glm-4.5-air:free"; // ✅ Removed trailing space
 
   const client = new OpenAI({
     baseURL: endpoint,
     apiKey: token,
-    dangerouslyAllowBrowser: true // ⚠️ Not for production
+    dangerouslyAllowBrowser: true // ⚠️ Use only for local development
   });
 
   const handleChange = (e) => {
@@ -34,7 +34,7 @@ const TextToText = () => {
           { role: "user", content: inputstate.userinput }
         ],
         temperature: 0.7,
-        max_tokens: 4096
+        max_tokens: 512 // ✅ Lower token limit
       });
 
       setOutputText(response.choices[0].message.content);
@@ -49,7 +49,7 @@ const TextToText = () => {
     <div>
       <Navbar />
       <div className="max-w-6xl mx-auto px-4">
-        <div className="h-[20vh]"></div>
+        <div className="h-[20vh]" />
 
         <form onSubmit={handleSubmit} className="flex items-center justify-center">
           <input
